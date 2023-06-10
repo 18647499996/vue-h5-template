@@ -12,7 +12,7 @@ export default {
   created() {
     utils.ChatMessageUtils.createTimChat()
     this.getLocation()
-    console.log("当前环境：" + config.httpUrl)
+    console.log("当前环境：" , config)
   },
 
   methods: {

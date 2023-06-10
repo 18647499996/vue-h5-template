@@ -1,5 +1,4 @@
 module.exports = {
-    httpUrl:'我是服务器域名',
     /**
      * todo devServer
      * 在dev环境下，webpck-dev-server的相关配置
@@ -11,4 +10,11 @@ module.exports = {
         hot: true,//是否开启热加载
         overlay: true //当出现编译错误或警告时，在浏览器中显示全屏覆盖。
     },
+    chainWebpack: (config) => {
+
+    },
+
+    configureWebpack: config => {
+        config.mode = 'development'
+    }
 }
