@@ -28,6 +28,11 @@ module.exports = {
     },
 
     configureWebpack: {
-        mode : 'production'
+        mode : 'production',
+        performance : {
+            //打包文件大小配置
+            "maxEntrypointSize": 10000000,
+            "maxAssetSize": 30000000
+        }
     }
 }

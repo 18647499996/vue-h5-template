@@ -3,7 +3,6 @@ const resolve = dir => path.join(__dirname,dir)
 
 module.exports = {
 
-
     /**
      * todo publicPath
      * 项目打包时，打包出来的文件根目录，如果我们设置成“/”则我们打包后默认都是在dist目录下,假设我们设置成"/app"，
@@ -25,14 +24,5 @@ module.exports = {
      */
     assetsDir: 'assets',
 
-
-
-    css: {},
-    plugins: [
-        ['import', {
-            libraryName: 'vant',
-            libraryDirectory: 'es',
-            style: true
-        }, 'vant']
-    ]
+    css: {}
 }

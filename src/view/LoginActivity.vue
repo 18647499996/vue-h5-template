@@ -1,10 +1,10 @@
 <template>
   <van-row>
     <van-row>
-      <van-button @click="getLocation">刘冬涵</van-button>
+      <van-button type="primary" @click="getLocation">刘冬涵</van-button>
     </van-row>
     <van-row>
-      <van-button text="刘冬涵"></van-button>
+      <van-button type="warning">{{ address }}</van-button>
     </van-row>
   </van-row>
 
@@ -15,16 +15,29 @@
 <script>
 import utils from 'liudonghan'
 import config from '../../builder/webpack.config'
+import shopApi from '../axios/ShopApiManager'
 
 export default {
   name: "LoginActivity",
-  components: {},
+  data() {
+    return {
+      address: '',
+    }
+  },
   created() {
+    shopApi.getHomeNavigationMenu({
+      is_index: 1,
+      device: 1
+    }).then(succeed => {
+
+    }).catch(error => {
+
+    })
     utils.ChatMessageUtils.createTimChat()
     utils.LocationManagerUtils.getCurrentLocation(succeed => {
-      console.log('定位信息：', succeed)
+      this.address = succeed.regeocode.formattedAddress
+      console.log('定位信息：', succeed.regeocode.formattedAddress)
     })
-    console.log("当前环境：", config.getConfig())
   },
 
   methods: {
