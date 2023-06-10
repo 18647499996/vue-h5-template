@@ -21,7 +21,7 @@ module.exports = {
      * 在dev环境下，webpck-dev-server的相关配置
      */
     devServer: {
-        port: 43999, //开发环境运行时的端口
+        port: 43569, //开发环境运行时的端口
         https: false,//是否启用HTTPS协议
         open: true, //项目运行成功后是否直接打开浏览器
         hot: true,//是否开启热加载

@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import utils from 'liudonghan'
+import '../src/plugins/vant'
 
 import App from './App.vue'
 import router from './router'
+
 
 utils.ConstantManagerUtils.config.mapKey = 'c2868746f6d0d525fc35b1f377e683c2';
 utils.ConstantManagerUtils.config.mapSecurityCode = '6a5a69a56b383204455176e1c99c1f75';
