@@ -1,7 +1,7 @@
 const development = {
     mode: 'development',
     name: '开发环境',
-    baseUserUrl: 'https://xxx.xxxxx.xxx',
+    baseUserUrl: 'https://loginf.lawxp.com/',
     baseShopUrl: 'https://csapi1.xinfushenghuo.cn/',
     level: 0,
     isDebug: true
@@ -10,7 +10,7 @@ const development = {
 const production = {
     mode: 'production',
     name: '生产环境',
-    baseUserUrl: 'https://xxx.xxxxx.xxx',
+    baseUserUrl: 'https://loginf.lawxp.com/',
     baseShopUrl: 'https://api1.xinfushenghuo.cn/',
     level: 1,
     isDebug: false
@@ -19,7 +19,7 @@ const production = {
 const test = {
     mode: 'test',
     name: '测试环境',
-    baseUserUrl: 'https://xxx.xxxxx.xxx',
+    baseUserUrl: 'https://loginf.lawxp.com/',
     baseShopUrl: 'https://api1.xinfushenghuo.cn/',
     level: 2,
     isDebug: true

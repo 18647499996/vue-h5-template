@@ -8,8 +8,11 @@ Vue.use(Router)
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: HelloWorld
+        name: 'HomeActivity',
+        component: HomeActivity,
+        meta: {
+            title: '首页'
+        }
     },
     {
         path: '/LoginActivity',
@@ -17,14 +20,6 @@ const routes = [
         component: LoginActivity,
         meta: {
             title: '登录',
-        }
-    },
-    {
-        path: '/HomeActivity',
-        name: 'HomeActivity',
-        component: HomeActivity,
-        meta: {
-            title: '首页'
         }
     }
 ]

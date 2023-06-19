@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import utils from 'liudonghan'
 import config from '../builder/webpack.config'
+// vant组件
 import '../src/plugins/vant'
 
 import App from './App.vue'
