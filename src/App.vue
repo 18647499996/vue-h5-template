@@ -15,7 +15,7 @@ export default {
     console.warn("current develop environment：", config.getConfig())
     utils.EventBusManagerUtils.register('TOKEN', succeed => {
       // todo 全局登录监听钩子
-      this.$router.push('LoginActivity')
+      console.warn('监听到未登录')
     })
   },
   methods: {},

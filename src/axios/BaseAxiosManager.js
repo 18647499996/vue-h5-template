@@ -1,6 +1,8 @@
 import baseManager from 'liudonghan'
 import config from '../../builder/webpack.config'
 
+const user = baseManager.StorageManagerUtils.getCookiesObject('USER')
+
 /**
  * todo 获取Axios引用
  */
@@ -36,7 +38,9 @@ export function baseShopServer() {
     return baseManager.AxiosManagerUtils
         .createAxiosServer()
         .baseApi(config.getConfig().baseShopUrl)
-        .addHeaders()
+        .addHeaders({
+            token:undefined !== user ? user.token : ''
+        })
         .addLogcatInterceptors()
         .addCodeInterceptors(code => {
             // todo 根据服务器业务需求配置"code"码拦截

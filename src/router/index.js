@@ -3,6 +3,8 @@ import Vue from 'vue';
 import LoginActivity from "@/view/LoginActivity";
 import HelloWorld from "@/components/HelloWorld";
 import HomeActivity from "@/view/HomeActivity";
+import ReleaseArticleActivity from "@/view/ReleaseArticleActivity";
+import GenerateFileActivity from "@/view/GenerateFileActivity";
 
 Vue.use(Router)
 const routes = [
@@ -20,6 +22,22 @@ const routes = [
         component: LoginActivity,
         meta: {
             title: '登录',
+        }
+    },
+    {
+        path: '/ReleaseArticleActivity',
+        name: 'ReleaseArticleActivity',
+        component: ReleaseArticleActivity,
+        meta: {
+            title: '登录',
+        }
+    },
+    {
+        path: '/GenerateFileActivity',
+        name: 'GenerateFileActivity',
+        component: GenerateFileActivity,
+        meta: {
+            title: 'PDF生成'
         }
     }
 ]

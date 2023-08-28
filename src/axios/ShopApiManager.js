@@ -18,7 +18,17 @@ export function getArticleDetails(data) {
     return baseAxiosManager.baseShopServer().get('apishop/article/list?', data)
 }
 
+/**
+ * todo 文章发布
+ * @param data
+ * @return {*}
+ */
+export function releaseArticle(data){
+    return baseAxiosManager.baseShopServer().post('apishop/article/create',data)
+}
+
 export default {
     getHomeNavigationMenu,
-    getArticleDetails
+    getArticleDetails,
+    releaseArticle
 }
