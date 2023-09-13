@@ -23,9 +23,9 @@ const config = {
   // 定义允许请求内容最大尺寸
   maxBodyLength: 2000,
   // 是否显示加载框,
-  isLoading: false,
+  loading: false,
   // 是否自动导出文件
-  isDownload: false
+  download: false
 }
 
 let axiosManager
@@ -63,7 +63,7 @@ export function baseApi(httpUrl) {
  * @param isLoading
  */
 export function isLoading(isLoading) {
-  axiosManager.defaults.isLoading = isLoading
+  axiosManager.defaults.loading = isLoading
   return this
 }
 
@@ -72,7 +72,7 @@ export function isLoading(isLoading) {
  * @param isDownload
  */
 export function isDownload(isDownload) {
-  axiosManager.defaults.isDownload = isDownload
+  axiosManager.defaults.download = isDownload
   return this
 }
 
@@ -116,6 +116,7 @@ export function addLogcatInterceptors() {
     console.warn('返回数据：', config.request.responseURL, (responseTime - requestTime) + 's', config.data)
     return config
   }, error => {
+    console.error('请求异常：',error)
     return Promise.reject(error)
   })
   return this
@@ -146,12 +147,13 @@ export function addCodeInterceptors(codeStatusListener) {
 }
 
 /**
- * todo blob 引用拦截器
+ * todo Blob请求拦截器
  */
 export function addBlobInterceptors() {
   axiosManager.interceptors.response.use(config => {
+    console.log('Blob拦截器：',config)
     let blob = new Blob([config.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-    if (config.config.isDownload) {
+    if (config['config']['download']) {
       // todo 自动下载导出文件
       let link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)

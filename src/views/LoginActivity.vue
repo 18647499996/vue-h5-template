@@ -1394,7 +1394,7 @@ export default {
       //   .then(succeed => {
       //     console.log('第四', succeed)
       //   })
-      api.getFileApi().isDownload(true).post('/api/ReturnVisit/ExportReturnVisit', {
+      api.getFileApi().isLoading(true).isDownload(false).post('/api/ReturnVisit/ExportReturnVisit', {
         endTime: '',
         isShowRepeat: false,
         keyWord: '',
