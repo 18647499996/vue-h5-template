@@ -23,7 +23,9 @@ const config = {
   // 定义允许请求内容最大尺寸
   maxBodyLength: 2000,
   // 是否显示加载框,
-  isLoading: false
+  isLoading: false,
+  // 是否自动导出文件
+  isDownload: false
 }
 
 let axiosManager
@@ -35,6 +37,17 @@ export function createAxiosServer() {
   axiosManager = axiosServer.create(config)
   return this
 }
+
+/**
+ * todo 创建axios引用（ blob ）
+ * @return {createBlobAxiosServer}
+ */
+export function createBlobAxiosServer() {
+  config.responseType = 'blob'
+  axiosManager = axiosServer.create(config)
+  return this
+}
+
 
 /**
  * todo 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
@@ -51,6 +64,15 @@ export function baseApi(httpUrl) {
  */
 export function isLoading(isLoading) {
   axiosManager.defaults.isLoading = isLoading
+  return this
+}
+
+/**
+ * todo 是否自动导出文件
+ * @param isDownload
+ */
+export function isDownload(isDownload) {
+  axiosManager.defaults.isDownload = isDownload
   return this
 }
 
@@ -117,6 +139,26 @@ export function addParamsInterceptors(paramsListener) {
 export function addCodeInterceptors(codeStatusListener) {
   axiosManager.interceptors.response.use(config => {
     return codeStatusListener(config)
+  }, error => {
+    return Promise.reject(error)
+  })
+  return this
+}
+
+/**
+ * todo blob 引用拦截器
+ */
+export function addBlobInterceptors() {
+  axiosManager.interceptors.response.use(config => {
+    let blob = new Blob([config.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+    if (config.config.isDownload) {
+      // todo 自动下载导出文件
+      let link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = new Date().getTime() + '.xls'
+      link.click()
+    }
+    return blob
   }, error => {
     return Promise.reject(error)
   })
@@ -208,13 +250,16 @@ export function flatMap(method, url, data) {
 
 export default {
   createAxiosServer,
+  createBlobAxiosServer,
   baseApi,
   addHeaders,
   isLoading,
+  isDownload,
   transformSchedulers,
   addLogcatInterceptors,
   addParamsInterceptors,
   addCodeInterceptors,
+  addBlobInterceptors,
   post,
   get,
   merger,

@@ -1,5 +1,8 @@
 <template>
   <van-row class='app'>
+
+    <van-image width='100%' src='https://dfzximg01.dftoutiao.com/minimodify/20210308/500x700_6045b42b1dd23.png' />
+
     <van-row class='row-tab'>
       <van-col :class='index === 0 ? "col-tab" : "col-tab on"' @click='index = 0'>密码登录</van-col>
       <van-col :class='index === 1 ? "col-tab" : "col-tab on"' @click='index = 1'>验证码登录</van-col>
@@ -56,22 +59,7 @@
       <van-button class='btn-login' color='#1970F3' round @click='onClickLogin'>登录</van-button>
     </van-row>
 
-    <!--    <videoPlayer class="video-player"-->
-    <!--                  ref="videoPlayer"-->
-    <!--                  :playsinline="true"-->
-    <!--                  :options="playerOptions"-->
-    <!--                  @play="onPlayerPlay($event)"-->
-    <!--                  @pause="onPlayerPause($event)"-->
-    <!--                  @ended="onPlayerEnded($event)"-->
-    <!--                  @waiting="onPlayerWaiting($event)"-->
-    <!--                  @playing="onPlayerPlaying($event)"-->
-    <!--                  @loadeddata="onPlayerLoadeddata($event)"-->
-    <!--                  @timeupdate="onPlayerTimeupdate($event)"-->
-    <!--                  @canplay="onPlayerCanplay($event)"-->
-    <!--                  @canplaythrough="onPlayerCanplaythrough($event)"-->
-    <!--                  @statechanged="playerStateChanged($event)"-->
-    <!--                  @ready="playerReadied">-->
-    <!--    </videoPlayer>-->
+    <div id='main'></div>
 
 
     <!--    底部背景-->
@@ -99,6 +87,7 @@
 
 import api from '@/api/BaseApi'
 import cryptoJs from 'crypto-js'
+import echarts from 'echarts'
 
 export default {
   components: {
@@ -1213,11 +1202,47 @@ export default {
             '2023-06-19 13:41:54.000'
           ]
         }
+      ],
+      obj: [
+        {
+          id: '1',
+          name: 'a',
+          tableList: [
+            {
+              id: 11,
+              name: 'aa',
+              setField: '1'
+            },
+            {
+              id: 12,
+              name: 'bb',
+              setField: '0'
+            }
+          ]
+        },
+        {
+          id: '2',
+          name: 'b',
+          tableList: []
+        }
       ]
     }
   },
   created() {
-
+    // todo 一级列表
+    for (let i = 0; i < this.obj.length; i++) {
+      // todo 在一列列表声明一个标记 "flag"
+      let flag = 0
+      // todo 遍历二级子列表
+      for (let j = 0; j < this.obj[i].tableList.length; j++) {
+        if (this.obj[i].tableList[j].setField !== 0) {
+          // todo 只要子列表当中有一个setField值 不为0 就说明不是全选
+          flag = 1
+        }
+      }
+      // todo 二级子列表循环结束后再判断
+      this.obj[i].check = flag === 0
+    }
   },
   mounted() {
     // this.utils.NotificationUtils.applyNotificationPermissionDialog('新消息通知', '您有一条新的消息，请注意查收', 0)
@@ -1349,21 +1374,52 @@ export default {
     },
 
     flatMap() {
-      api.getShopApi().flatMap('get', '/apiindex/get-navigation-location?', { is_index: 1 })
-        .then(succeed => {
-          console.log('第一', succeed)
-          return api.getLiveApi().flatMap('form', '/home/getHomeIndex', {
-            'uid': 'user_2103415823',
-            'page': '1',
-            'types': '0'
-          })
-        })
-        .then(succeed => {
-          console.log('第二', succeed)
-        })
+      // api.getShopApi().flatMap('get', '/apiindex/get-navigation-location?', { is_index: 1 })
+      //   .then(succeed => {
+      //     console.log('第一', succeed)
+      //     return api.getLiveApi().flatMap('form', '/home/getHomeIndex', {
+      //       'uid': 'user_2103415823',
+      //       'page': '1',
+      //       'types': '0'
+      //     })
+      //   })
+      //   .then(succeed => {
+      //     console.log('第二', succeed)
+      //     return succeed
+      //   })
+      //   .then(succeed => {
+      //     console.log('第三', succeed)
+      //     return succeed
+      //   })
+      //   .then(succeed => {
+      //     console.log('第四', succeed)
+      //   })
+      api.getFileApi().isDownload(true).post('/api/ReturnVisit/ExportReturnVisit', {
+        endTime: '',
+        isShowRepeat: false,
+        keyWord: '',
+        lineId: 0,
+        marketState: 0,
+        pageIndex: 1,
+        pageSize: 10,
+        signState: 0,
+        startTime: '',
+        type: 6
+      }).then( blob => {
+        // let blob = new Blob([succeed.data], { type: 'application/x-xls' })
+        console.log('导出数据',blob)
+        // let link = document.createElement('a')
+        // link.href = window.URL.createObjectURL(blob)
+        // //配置下载的文件名
+        // link.download =  + 'liu_' + '.xls'
+        // link.click()
+      }).catch(error => {
+        console.log('异常了？',error)
+      })
     },
 
     onClickLogin() {
+
     },
 
     onClickDemo() {

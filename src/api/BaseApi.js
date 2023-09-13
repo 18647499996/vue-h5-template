@@ -1,4 +1,5 @@
 import liudonghan from '@/utils/AxiosManagerUtils'
+import { addBlobInterceptors } from '../utils/AxiosManagerUtils'
 
 export function getShopApi() {
   return liudonghan
@@ -29,6 +30,17 @@ export function getLiveApi() {
     })
 }
 
+export function getFileApi(){
+  return liudonghan
+    .createBlobAxiosServer()
+    .addHeaders({
+      'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjcyRENCNzE2RTE3NzAzMjQxQjM5QzU4NTlCQjNDNDI5IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2OTQ1Njc3MDQsImV4cCI6MTY5NTQzMTcwNCwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5sYXd4cC5jb20iLCJjbGllbnRfaWQiOiJjcm0iLCJzdWIiOiI1NzdfaXN3ZWJvYTpUcnVlX2lzd2VzYWxlOlRydWVfaXNhZ2VudDpGYWxzZSIsImF1dGhfdGltZSI6MTY5NDU2NzcwNCwiaWRwIjoibG9jYWwiLCJVc2VySWQiOiIyMTAyNzIxMzY2IiwibmFtZSI6Iua1i-ivlWxhdzMiLCJnaXZlbl9uYW1lIjoi5rWL6K-VbGF3Myjli7_liKApIiwiZW1haWwiOiI_RD8_Zz8_w6w_P2phP8OqYT_vv6UiLCJqdGkiOiIyQjVEMEU3QUUzQjdGOTkxNDk4RTQ1NDZFNEQ1NzM0NCIsImlhdCI6MTY5NDU2NzcwNCwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSJdLCJhbXIiOlsiY3VzdG9tIl19.Nb82JAbTZqQpThiqu3YoSenS_qA8Vz3JvyrZj5yGbCnsy2UDaUX7eLAwsqHJywShc245gxccSEdy7mu3S9ErZT0SHpL4QgW1nco2Z7N5uiF2P2VXOomxiQrrOi6Dsw8jjTWoaesvjOxzamtG7vTdf-avBgOSEAh61_iWi-G0x2ALs2Y51a9AVHGVjgv59pPW7rNivdnpEDa2P05Qibd_-wYMh1A-pzqjBD8TDAI6K2qyyK64Ca7x6VVKP29yOJbV8zNpbZY1V55S1_jZJJ0Km14zMjbgtuxXfno_0lFvkKL72uQNPSDPWSF3ydxM07OfyBAompLP3isN2XJ0Xa9Drw'
+    })
+    .baseApi('https://api1.likewon.cn')
+    .addLogcatInterceptors()
+    .addBlobInterceptors()
+}
+
 export function getAxiosManger(){
   return liudonghan.createAxiosServer()
 }
@@ -37,5 +49,6 @@ export default {
   getAxiosManger,
   getShopApi,
   getLiveApi,
+  getFileApi
 }
 
