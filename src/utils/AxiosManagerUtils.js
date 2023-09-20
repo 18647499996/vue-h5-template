@@ -151,7 +151,6 @@ export function addCodeInterceptors(codeStatusListener) {
  */
 export function addBlobInterceptors() {
   axiosManager.interceptors.response.use(config => {
-    console.log('Blob拦截器：',config)
     let blob = new Blob([config.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
     if (config['config']['download']) {
       // todo 自动下载导出文件
