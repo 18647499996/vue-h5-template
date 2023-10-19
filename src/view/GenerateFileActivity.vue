@@ -154,8 +154,8 @@ export default {
       if (params.file) {
         let cos = new COS({
           //腾讯云的id和密码
-          SecretId: "",
-          SecretKey: ""
+          SecretId: "AKIDA9vTosgEXYJo47yJdsqa8QSs41i8LH0T",
+          SecretKey: "IL9k6E7mDOJ1cy5wYtHXaNwIPeplTv60"
         });
         // 执行上传操作
         cos.putObject(

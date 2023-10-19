@@ -53,6 +53,13 @@ export default {
     }).catch(error => {
 
     })
+    shopApiManager.getArticleDetails({
+      'article_id': this.articleId,
+    }).then(succeed => {
+
+    }).catch(error => {
+
+    })
   },
   methods: {}
 }
