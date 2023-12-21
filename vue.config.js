@@ -53,10 +53,17 @@ module.exports = {
     },
     proxy: {
       //配置跨域
+      // '/api': {
+      //   target: 'https://api.hhsqu.com/',
+      //   // ws:true,
+      //   changOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': 'api'
+      //   }
+      // },
       '/api': {
-        target: 'https://api.hhsqu.com/',
-        // ws:true,
-        changOrigin: true,
+        target: 'http://114.113.144.174:8089',
+        changeOrigin: true,
         pathRewrite: {
           '^/api': 'api'
         }

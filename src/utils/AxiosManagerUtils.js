@@ -34,6 +34,7 @@ let axiosManager
  * todo 创建axios引用
  */
 export function createAxiosServer() {
+  config.responseType = 'json';
   axiosManager = axiosServer.create(config)
   return this
 }
@@ -77,6 +78,17 @@ export function isDownload(isDownload) {
 }
 
 /**
+ * todo excel格式
+ * @param fileName
+ * @return {xls}
+ */
+export function xls(fileName) {
+  axiosManager.defaults.mimeType = 'application/vnd.ms-excel'
+  axiosManager.defaults.fileName = fileName
+  return this
+}
+
+/**
  * todo 是即将被发送的自定义请求头
  * @param headers
  */
@@ -116,7 +128,6 @@ export function addLogcatInterceptors() {
     console.warn('返回数据：', config.request.responseURL, (responseTime - requestTime) + 's', config.data)
     return config
   }, error => {
-    console.error('请求异常：',error)
     return Promise.reject(error)
   })
   return this
@@ -141,7 +152,8 @@ export function addCodeInterceptors(codeStatusListener) {
   axiosManager.interceptors.response.use(config => {
     return codeStatusListener(config)
   }, error => {
-    return Promise.reject(error)
+    console.error('请求异常：', error.response)
+    return codeStatusListener(error.response)
   })
   return this
 }
@@ -151,19 +163,31 @@ export function addCodeInterceptors(codeStatusListener) {
  */
 export function addBlobInterceptors() {
   axiosManager.interceptors.response.use(config => {
-    let blob = new Blob([config.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-    if (config['config']['download']) {
-      // todo 自动下载导出文件
-      let link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      link.download = new Date().getTime() + '.xls'
-      link.click()
+    switch (config['config']['mimeType']) {
+      case 'application/vnd.ms-excel':
+        return getXls(config)
+      default:
+        return getXls(config)
     }
-    return blob
   }, error => {
     return Promise.reject(error)
   })
   return this
+}
+
+/**
+ * 获取excel表格下载blob
+ * @param config
+ */
+export function getXls(config) {
+  let blob = new Blob([config.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+  if (config['config']['download']) {
+    let link = document.createElement('a')
+    link.href = window.URL.createObjectURL(blob)
+    link.download = config['config']['fileName'] === undefined || '' === config['config']['fileName'] ? new Date().getTime() + '.xls' : config['config']['fileName'] + '.xls'
+    link.click()
+  }
+  return blob
 }
 
 /**
@@ -250,12 +274,14 @@ export function flatMap(method, url, data) {
 
 
 export default {
+  config,
   createAxiosServer,
   createBlobAxiosServer,
   baseApi,
   addHeaders,
   isLoading,
   isDownload,
+  xls,
   transformSchedulers,
   addLogcatInterceptors,
   addParamsInterceptors,

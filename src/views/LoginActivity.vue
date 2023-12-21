@@ -1270,28 +1270,28 @@ export default {
     // this.utils.LocationManagerUtils.getPoiSearch({ keyword: '江城明珠', city: '武汉' }, result => {
     //   console.warn('POI周边信息：',result)
     // })
-    this.utils.ChatMessageUtils.login('supplier_2103291574', 'eJwtjcsKwjAURP8l20hJYpMmBReNFl2oIBWkbqSQVK62kj4UH-jv1ra7mTPDzAft14n3sDUKEfMImvQejL21kEOPm7tzRSdPjJIpU5QH-lhrzDVzDgwKqU*IEL5kYkjs00FtO845Z4SQgbZQ-pmQARVCKTauwLl70TFm8wNtFE2zC34fF3pjEvvSttoCTvNit1xFsoxwJeMZ*v4Axzs0Rg__', data => {
-      console.warn('IM登录：', data)
-    })
-    this.utils.ChatMessageUtils
-      .onMessageReceived(data => {
-        console.warn('onMessageReceived：', data)
-      })
-      .onMessageRevoked(data => {
-        console.warn('onMessageRevoked：', data)
-      })
-      .onGroupListUpdated(data => {
-        console.warn('onGroupListUpdated：', data)
-      })
-      .onGroupAttributesUpdated(data => {
-        console.warn('onGroupAttributesUpdated：', data)
-      })
-      .onNetWorkStateChange(data => {
-        console.warn('onNetWorkStateChange：', data)
-      })
-      .onKickedOut(data => {
-        console.warn('onKickedOut：', data)
-      })
+    // this.utils.ChatMessageUtils.login('supplier_2103291574', 'eJwtjcsKwjAURP8l20hJYpMmBReNFl2oIBWkbqSQVK62kj4UH-jv1ra7mTPDzAft14n3sDUKEfMImvQejL21kEOPm7tzRSdPjJIpU5QH-lhrzDVzDgwKqU*IEL5kYkjs00FtO845Z4SQgbZQ-pmQARVCKTauwLl70TFm8wNtFE2zC34fF3pjEvvSttoCTvNit1xFsoxwJeMZ*v4Axzs0Rg__', data => {
+    //   console.warn('IM登录：', data)
+    // })
+    // this.utils.ChatMessageUtils
+    //   .onMessageReceived(data => {
+    //     console.warn('onMessageReceived：', data)
+    //   })
+    //   .onMessageRevoked(data => {
+    //     console.warn('onMessageRevoked：', data)
+    //   })
+    //   .onGroupListUpdated(data => {
+    //     console.warn('onGroupListUpdated：', data)
+    //   })
+    //   .onGroupAttributesUpdated(data => {
+    //     console.warn('onGroupAttributesUpdated：', data)
+    //   })
+    //   .onNetWorkStateChange(data => {
+    //     console.warn('onNetWorkStateChange：', data)
+    //   })
+    //   .onKickedOut(data => {
+    //     console.warn('onKickedOut：', data)
+    //   })
     // console.log('TIME', this.utils.ChatMessageUtils.TIM.TYPES)
     // console.log('cookies', this.utils.StorageManagerUtils.getCookies('cookies'))
     // console.log('cookiesObject', this.utils.StorageManagerUtils.getCookiesObject('cookiesObject'))
@@ -1394,7 +1394,11 @@ export default {
       //   .then(succeed => {
       //     console.log('第四', succeed)
       //   })
-      api.getFileApi().isLoading(true).isDownload(false).post('/api/ReturnVisit/ExportReturnVisit', {
+      api.getFileApi()
+        .isLoading(true)
+        .isDownload(false)
+        .xls('刘冬涵')
+        .post('/api/ReturnVisit/ExportReturnVisit', {
         endTime: '',
         isShowRepeat: false,
         keyWord: '',
@@ -1405,16 +1409,22 @@ export default {
         signState: 0,
         startTime: '',
         type: 6
-      }).then( blob => {
+      }).then(blob => {
         // let blob = new Blob([succeed.data], { type: 'application/x-xls' })
-        console.log('导出数据',blob)
+        console.log('导出数据', blob)
         // let link = document.createElement('a')
         // link.href = window.URL.createObjectURL(blob)
         // //配置下载的文件名
-        // link.download =  + 'liu_' + '.xls'
+        // link.download = 'liu_' + '.xls'
         // link.click()
       }).catch(error => {
-        console.log('异常了？',error)
+        console.log('异常了？', error)
+      })
+      api.getAmbApi().get('api/GD_Info/QueryGdInfo?Title=&intPageSize=10&page=1')
+        .then(data => {
+
+        }).catch(error => {
+          console.log('异常了？', error)
       })
     },
 

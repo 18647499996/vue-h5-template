@@ -1,5 +1,4 @@
 import liudonghan from '@/utils/AxiosManagerUtils'
-import { addBlobInterceptors } from '../utils/AxiosManagerUtils'
 
 export function getShopApi() {
   return liudonghan
@@ -30,18 +29,44 @@ export function getLiveApi() {
     })
 }
 
-export function getFileApi(){
+export function getFileApi() {
   return liudonghan
     .createBlobAxiosServer()
     .addHeaders({
-      'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjcyRENCNzE2RTE3NzAzMjQxQjM5QzU4NTlCQjNDNDI5IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2OTQ1Njc3MDQsImV4cCI6MTY5NTQzMTcwNCwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5sYXd4cC5jb20iLCJjbGllbnRfaWQiOiJjcm0iLCJzdWIiOiI1NzdfaXN3ZWJvYTpUcnVlX2lzd2VzYWxlOlRydWVfaXNhZ2VudDpGYWxzZSIsImF1dGhfdGltZSI6MTY5NDU2NzcwNCwiaWRwIjoibG9jYWwiLCJVc2VySWQiOiIyMTAyNzIxMzY2IiwibmFtZSI6Iua1i-ivlWxhdzMiLCJnaXZlbl9uYW1lIjoi5rWL6K-VbGF3Myjli7_liKApIiwiZW1haWwiOiI_RD8_Zz8_w6w_P2phP8OqYT_vv6UiLCJqdGkiOiIyQjVEMEU3QUUzQjdGOTkxNDk4RTQ1NDZFNEQ1NzM0NCIsImlhdCI6MTY5NDU2NzcwNCwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSJdLCJhbXIiOlsiY3VzdG9tIl19.Nb82JAbTZqQpThiqu3YoSenS_qA8Vz3JvyrZj5yGbCnsy2UDaUX7eLAwsqHJywShc245gxccSEdy7mu3S9ErZT0SHpL4QgW1nco2Z7N5uiF2P2VXOomxiQrrOi6Dsw8jjTWoaesvjOxzamtG7vTdf-avBgOSEAh61_iWi-G0x2ALs2Y51a9AVHGVjgv59pPW7rNivdnpEDa2P05Qibd_-wYMh1A-pzqjBD8TDAI6K2qyyK64Ca7x6VVKP29yOJbV8zNpbZY1V55S1_jZJJ0Km14zMjbgtuxXfno_0lFvkKL72uQNPSDPWSF3ydxM07OfyBAompLP3isN2XJ0Xa9Drw'
+      'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjcyRENCNzE2RTE3NzAzMjQxQjM5QzU4NTlCQjNDNDI5IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE3MDMxMjMxODUsImV4cCI6MTcwMzk4NzE4NSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5sYXd4cC5jb20iLCJjbGllbnRfaWQiOiJjcm0iLCJzdWIiOiI1NzdfaXN3ZWJvYTpUcnVlX2lzd2VzYWxlOlRydWVfaXNhZ2VudDpGYWxzZSIsImF1dGhfdGltZSI6MTcwMzEyMzE4NSwiaWRwIjoibG9jYWwiLCJVc2VySWQiOiIyMTAyNzIxMzY2IiwibmFtZSI6Iua1i-ivlWxhdzMiLCJnaXZlbl9uYW1lIjoi5rWL6K-VbGF3Myjli7_liKApIiwiZW1haWwiOiI_RD8_Zz8_w6w_P2phP8OqYT_vv6UiLCJqdGkiOiIyMTgwMUY3RUYxNkFFQzFBRjkzMzIzMzFBN0U2QzA5OSIsImlhdCI6MTcwMzEyMzE4NSwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSJdLCJhbXIiOlsiY3VzdG9tIl19.Dk3wWZmjfX_gtAllNefs2DrczgzVyaNkM1dwA2yAhDerlkogzrCLJCHAdSInwX5ETIqgB6z_p8MmeZtVAYfcHG6PdPbY01-R2L7UJa23w71mdf7zH-nm6ibyqSacwKPWeuJNTA2mFm7dk05E5rcowDMAdlRTQO6MGWG9pi5ceHNQxPO7B1AUuVOtTel-7y2Z9o1QpyXQFV9ustE6Qv7yWyzkr6TBDkc4fbKVx7o3yuqSqQuP6bJ560CjSoAMRXfAMz3__rwHkGqwVD_zZRELeSqJFXHM4Jz_ZBkaSn3NzCAZACZPi4rXm6KcqC8yOlGqXP1SxEhUPByO9fJYFrJwOw'
     })
     .baseApi('https://api1.likewon.cn')
     .addLogcatInterceptors()
     .addBlobInterceptors()
 }
 
-export function getAxiosManger(){
+export function getAmbApi() {
+  return liudonghan
+    .createAxiosServer()
+    .baseApi('http://114.113.144.174:8089/')
+    .addHeaders({
+      'Authorization': ' Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjcyRENCNzE2RTE3NzAzMjQxQjM5QzU4NTlCQjNDNDI5IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE3MDMxMjMxODUsImV4cCI6MTcwMzk4NzE4NSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5sYXd4cC5jb20iLCJjbGllbnRfaWQiOiJjcm0iLCJzdWIiOiI1NzdfaXN3ZWJvYTpUcnVlX2lzd2VzYWxlOlRydWVfaXNhZ2VudDpGYWxzZSIsImF1dGhfdGltZSI6MTcwMzEyMzE4NSwiaWRwIjoibG9jYWwiLCJVc2VySWQiOiIyMTAyNzIxMzY2IiwibmFtZSI6Iua1i-ivlWxhdzMiLCJnaXZlbl9uYW1lIjoi5rWL6K-VbGF3Myjli7_liKApIiwiZW1haWwiOiI_RD8_Zz8_w6w_P2phP8OqYT_vv6UiLCJqdGkiOiIyMTgwMUY3RUYxNkFFQzFBRjkzMzIzMzFBN0U2QzA5OSIsImlhdCI6MTcwMzEyMzE4NSwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSJdLCJhbXIiOlsiY3VzdG9tIl19.Dk3wWZmjfX_gtAllNefs2DrczgzVyaNkM1dwA2yAhDerlkogzrCLJCHAdSInwX5ETIqgB6z_p8MmeZtVAYfcHG6PdPbY01-R2L7UJa23w71mdf7zH-nm6ibyqSacwKPWeuJNTA2mFm7dk05E5rcowDMAdlRTQO6MGWG9pi5ceHNQxPO7B1AUuVOtTel-7y2Z9o1QpyXQFV9ustE6Qv7yWyzkr6TBDkc4fbKVx7o3yuqSqQuP6bJ560CjSoAMRXfAMz3__rwHkGqwVD_zZRELeSqJFXHM4Jz_ZBkaSn3NzCAZACZPi4rXm6KcqC8yOlGqXP1SxEhUPByO9fJYFrJwOw'
+    })
+    .addLogcatInterceptors()
+    .addCodeInterceptors(code => {
+      switch (code.status) {
+        case 200:
+          switch (code.data.code) {
+            case  200:
+              return Promise.resolve(code.data)
+            default:
+              return Promise.reject({ code: code.data.code, message: code.data.message })
+          }
+        case 401:
+          return Promise.reject({ code: 401, message: '登录过期' })
+        default:
+          return Promise.reject({ code: code.status, message: code })
+      }
+    })
+
+}
+
+export function getAxiosManger() {
   return liudonghan.createAxiosServer()
 }
 
@@ -49,6 +74,7 @@ export default {
   getAxiosManger,
   getShopApi,
   getLiveApi,
-  getFileApi
+  getFileApi,
+  getAmbApi
 }
 
