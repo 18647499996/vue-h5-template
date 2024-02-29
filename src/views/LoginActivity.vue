@@ -1374,58 +1374,57 @@ export default {
     },
 
     flatMap() {
-      // api.getShopApi().flatMap('get', '/apiindex/get-navigation-location?', { is_index: 1 })
-      //   .then(succeed => {
-      //     console.log('第一', succeed)
-      //     return api.getLiveApi().flatMap('form', '/home/getHomeIndex', {
-      //       'uid': 'user_2103415823',
-      //       'page': '1',
-      //       'types': '0'
-      //     })
-      //   })
-      //   .then(succeed => {
-      //     console.log('第二', succeed)
-      //     return succeed
-      //   })
-      //   .then(succeed => {
-      //     console.log('第三', succeed)
-      //     return succeed
-      //   })
-      //   .then(succeed => {
-      //     console.log('第四', succeed)
-      //   })
-      api.getFileApi()
-        .isLoading(true)
-        .isDownload(false)
-        .xls('刘冬涵')
-        .post('/api/ReturnVisit/ExportReturnVisit', {
-        endTime: '',
-        isShowRepeat: false,
-        keyWord: '',
-        lineId: 0,
-        marketState: 0,
-        pageIndex: 1,
-        pageSize: 10,
-        signState: 0,
-        startTime: '',
-        type: 6
-      }).then(blob => {
-        // let blob = new Blob([succeed.data], { type: 'application/x-xls' })
-        console.log('导出数据', blob)
-        // let link = document.createElement('a')
-        // link.href = window.URL.createObjectURL(blob)
-        // //配置下载的文件名
-        // link.download = 'liu_' + '.xls'
-        // link.click()
-      }).catch(error => {
-        console.log('异常了？', error)
-      })
-      api.getAmbApi().get('api/GD_Info/QueryGdInfo?Title=&intPageSize=10&page=1')
-        .then(data => {
-
-        }).catch(error => {
-          console.log('异常了？', error)
-      })
+      api.getShopApi().flatMap('get', '/apiindex/get-navigation-location?', { is_index: 1 })
+        .then(succeed => {
+          console.log('第一', succeed)
+          return api.getShopApi().flatMap('get', '/apiindex/get-navigation-location?', { is_index: 1 })
+        })
+        .then(succeed => {
+          console.log('第二', succeed)
+          return succeed
+        })
+        .then(succeed => {
+          console.log('第三', succeed)
+          return succeed
+        })
+        .then(succeed => {
+          console.log('第四', succeed)
+          return Promise.reject("失败了")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      // api.getFileApi()
+      //   .isLoading(true)
+      //   .xls('刘冬涵')
+      //   .post('/api/ReturnVisit/ExportReturnVisit', {
+      //   endTime: '',
+      //   isShowRepeat: false,
+      //   keyWord: '',
+      //   lineId: 0,
+      //   marketState: 0,
+      //   pageIndex: 1,
+      //   pageSize: 10,
+      //   signState: 0,
+      //   startTime: '',
+      //   type: 6
+      // }).then(blob => {
+      //   // let blob = new Blob([succeed.data], { type: 'application/x-xls' })
+      //   console.log('导出数据', blob)
+      //   // let link = document.createElement('a')
+      //   // link.href = window.URL.createObjectURL(blob)
+      //   // //配置下载的文件名
+      //   // link.download = 'liu_' + '.xls'
+      //   // link.click()
+      // }).catch(error => {
+      //   console.log('异常了？', error)
+      // })
+      // api.getAmbApi().get('api/GD_Info/QueryGdInfo?Title=&intPageSize=10&page=1')
+      //   .then(data => {
+      //
+      //   }).catch(error => {
+      //     console.log('异常了？', error)
+      // })
     },
 
     onClickLogin() {

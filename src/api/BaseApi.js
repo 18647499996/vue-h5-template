@@ -9,7 +9,7 @@ export function getShopApi() {
       return params
     })
     .addCodeInterceptors(code => {
-      return code
+      return code.data
     })
 }
 
